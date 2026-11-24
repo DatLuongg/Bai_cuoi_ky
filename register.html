@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký - ModaShop</title>
+  <script>
+    // Áp dụng Dark Mode ngay lập tức trước khi CSS render để tránh nháy trắng
+    if (localStorage.getItem('modashop_theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+
+  <!-- Header đồng bộ phong cách ModaShop -->
+  <header class="auth-header">
+    <div class="container auth-header-inner">
+      <div class="auth-header-left">
+        <a href="index.html" class="logo auth-logo">
+          <span class="logo-badge">M</span>ModaShop
+        </a>
+        <span class="auth-page-title">Đăng ký</span>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Chuyển đổi giao diện Sáng/Tối" title="Chuyển chế độ Sáng / Tối">
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </button>
+        <a href="index.html" class="auth-back-link">← Trang chủ</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <div class="container auth-wrap">
+
+      <!-- Bên trái: Giới thiệu quyền lợi thành viên -->
+      <div class="auth-intro">
+        <span class="banner-tag">ĐĂNG KÝ THÀNH VIÊN</span>
+        <h1>ModaShop</h1>
+        <p>Tạo tài khoản ngay hôm nay để nhận ưu đãi dành riêng cho thành viên mới.</p>
+        <ul class="auth-perks">
+          <li>✓ Giảm ngay 15% cho đơn hàng đầu tiên từ 299.000đ</li>
+          <li>✓ Lưu trữ giỏ hàng và đồng bộ trạng thái mua sắm</li>
+          <li>✓ Đổi size linh hoạt miễn phí tại nhà trong 7 ngày</li>
+        </ul>
+      </div>
+
+      <!-- Bên phải: Form đăng ký -->
+      <form class="auth-box" id="registerForm" novalidate>
+        <h2>Đăng ký</h2>
+        <p class="auth-subtitle">Tạo tài khoản ModaShop miễn phí chỉ trong 30 giây</p>
+
+        <div class="form-group">
+          <label for="regName" class="form-label">Họ và tên</label>
+          <input type="text" id="regName" placeholder="Ví dụ: Nguyễn Văn A">
+          <p class="field-error" id="regNameError"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="regAccount" class="form-label">Email hoặc số điện thoại</label>
+          <input type="text" id="regAccount" placeholder="Nhập email hoặc số điện thoại (10 số)">
+          <p class="field-error" id="regAccountError"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="regPassword" class="form-label">Mật khẩu</label>
+          <div class="password-box">
+            <input type="password" id="regPassword" placeholder="Tối thiểu 6 ký tự">
+            <button type="button" class="toggle-pass" data-target="regPassword">Hiện</button>
+          </div>
+          <p class="field-error" id="regPasswordError"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="regConfirm" class="form-label">Nhập lại mật khẩu</label>
+          <div class="password-box">
+            <input type="password" id="regConfirmPassword" placeholder="Xác nhận lại mật khẩu">
+            <button type="button" class="toggle-pass" data-target="regConfirm">Hiện</button>
+          </div>
+          <p class="field-error" id="regConfirmError"></p>
+        </div>
+
+        <p class="form-error" id="registerError"></p>
+
+        <button type="submit" class="btn-main auth-submit">ĐĂNG KÝ</button>
+
+        <div class="auth-extra">
+          <button type="button" class="link-btn-muted" onclick="document.getElementById('termsModal').classList.add('show')">Điều khoản dịch vụ ModaShop</button>
+        </div>
+
+        <p class="auth-switch">
+          Bạn đã có tài khoản? <a href="login.html">Đăng nhập</a>
+        </p>
+      </form>
+
+    </div>
+  </main>
+
+  <!-- Modal Điều khoản dịch vụ -->
+  <div class="info-modal-backdrop" id="termsModal" onclick="if(event.target===this) this.classList.remove('show')">
+    <div class="info-modal">
+      <div class="info-modal-header">
+        <h3>Điều khoản dịch vụ</h3>
+        <button type="button" class="info-modal-close" onclick="document.getElementById('termsModal').classList.remove('show')">×</button>
+      </div>
+      <div class="info-modal-body">
+        1. Thông tin tài khoản được lưu cục bộ trên trình duyệt (<code>localStorage</code>) phục vụ mục đích trải nghiệm đặt hàng.<br><br>
+        2. Khách hàng được quyền kiểm tra sản phẩm trước khi thanh toán và đổi trả trong vòng 7 ngày nếu còn nguyên tem mác.
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+  <script>
+    // Xử lý bật/tắt Dark Mode đồng bộ với toàn bộ website
+    const themeToggleBtn = document.getElementById('themeToggle');
+    if (themeToggleBtn && !themeToggleBtn.dataset.bound) {
+      themeToggleBtn.dataset.bound = 'true';
+      themeToggleBtn.addEventListener('click', () => {
+        const root = document.documentElement;
+        if (root.getAttribute('data-theme') === 'dark') {
+          root.removeAttribute('data-theme');
+          localStorage.setItem('modashop_theme', 'light');
+        } else {
+          root.setAttribute('data-theme', 'dark');
+          localStorage.setItem('modashop_theme', 'dark');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

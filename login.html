@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập - ModaShop</title>
+  <script>
+    // Áp dụng Dark Mode ngay lập tức trước khi CSS render để tránh nháy trắng
+    if (localStorage.getItem('modashop_theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+
+  <!-- Header đồng bộ phong cách ModaShop -->
+  <header class="auth-header">
+    <div class="container auth-header-inner">
+      <div class="auth-header-left">
+        <a href="index.html" class="logo auth-logo">
+          <span class="logo-badge">M</span>ModaShop
+        </a>
+        <span class="auth-page-title">Đăng nhập</span>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Chuyển đổi giao diện Sáng/Tối" title="Chuyển chế độ Sáng / Tối">
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </button>
+        <a href="index.html" class="auth-back-link">← Trang chủ</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <div class="container auth-wrap">
+
+      <!-- Bên trái: Giới thiệu thương hiệu đồng bộ Hero Banner -->
+      <div class="auth-intro">
+        <span class="banner-tag">THÀNH VIÊN MODASHOP</span>
+        <h1>ModaShop</h1>
+        <p>Thời trang hiện đại, giá tốt mỗi ngày dành cho giới trẻ.</p>
+        <ul class="auth-perks">
+          <li>✓ Lưu trữ giỏ hàng và lịch sử đơn hàng tiện lợi</li>
+          <li>✓ Miễn phí vận chuyển cho đơn từ 299.000đ</li>
+          <li>✓ Đổi trả linh hoạt trong vòng 7 ngày</li>
+        </ul>
+      </div>
+
+      <!-- Bên phải: Form đăng nhập (giữ nguyên toàn bộ ID cho script.js) -->
+      <form class="auth-box" id="loginForm" novalidate>
+        <h2>Đăng nhập</h2>
+        <p class="auth-subtitle">Chào mừng bạn quay trở lại với ModaShop</p>
+
+        <div class="form-group">
+          <label for="loginAccount" class="form-label">Tài khoản</label>
+          <input type="text" id="loginAccount" placeholder="Nhập email hoặc số điện thoại">
+          <p class="field-error" id="loginAccountError"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword" class="form-label">Mật khẩu</label>
+          <div class="password-box">
+            <input type="password" id="loginPassword" placeholder="Nhập mật khẩu">
+            <button type="button" class="toggle-pass" data-target="loginPassword">Hiện</button>
+          </div>
+          <p class="field-error" id="loginPasswordError"></p>
+        </div>
+
+        <p class="form-error" id="loginError"></p>
+
+        <button type="submit" class="btn-main auth-submit">ĐĂNG NHẬP</button>
+
+        <div class="auth-extra">
+          <button type="button" class="link-btn-muted" onclick="document.getElementById('forgotModal').classList.add('show')">Quên mật khẩu?</button>
+        </div>
+
+        <p class="auth-switch">
+          Bạn mới biết đến ModaShop? <a href="register.html">Đăng ký ngay</a>
+        </p>
+      </form>
+
+    </div>
+  </main>
+
+  <!-- Modal Quên mật khẩu (thay cho alert() mặc định) -->
+  <div class="info-modal-backdrop" id="forgotModal" onclick="if(event.target===this) this.classList.remove('show')">
+    <div class="info-modal">
+      <div class="info-modal-header">
+        <h3>Khôi phục mật khẩu</h3>
+        <button type="button" class="info-modal-close" onclick="document.getElementById('forgotModal').classList.remove('show')">×</button>
+      </div>
+      <div class="info-modal-body">
+        Vui lòng liên hệ bộ phận hỗ trợ qua email <strong>hotro@modashop.vn</strong> hoặc tạo tài khoản mới tại trang <a href="register.html" style="color: var(--accent); font-weight: 600;">Đăng ký</a> để tiếp tục trải nghiệm.
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+  <script>
+    // Xử lý bật/tắt Dark Mode đồng bộ với index.html và cart.html
+    const themeToggleBtn = document.getElementById('themeToggle');
+    if (themeToggleBtn && !themeToggleBtn.dataset.bound) {
+      themeToggleBtn.dataset.bound = 'true';
+      themeToggleBtn.addEventListener('click', () => {
+        const root = document.documentElement;
+        if (root.getAttribute('data-theme') === 'dark') {
+          root.removeAttribute('data-theme');
+          localStorage.setItem('modashop_theme', 'light');
+        } else {
+          root.setAttribute('data-theme', 'dark');
+          localStorage.setItem('modashop_theme', 'dark');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

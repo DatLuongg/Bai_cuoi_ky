@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ModaShop - Thời trang hiện đại, giá tốt mỗi ngày</title>
+  <script>
+    // Áp dụng Dark Mode ngay lập tức trước khi CSS render để tránh nháy trắng
+    if (localStorage.getItem('modashop_theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+  <!-- Font chữ hiện đại hỗ trợ tiếng Việt chuẩn đẹp -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-top">
+      <div class="container header-top-inner">
+        <div class="header-links">
+          <a href="#products">Bộ sưu tập mới</a>
+          <a href="#service-bar">Ưu đãi vận chuyển</a>
+          <a href="#footer">Liên hệ</a>
+        </div>
+        <div class="header-links">
+          <button type="button" class="link-btn" onclick="openInfoModal('Hướng dẫn mua hàng', '1. Chọn sản phẩm và kích cỡ phù hợp.<br>2. Nhấn Thêm vào giỏ hàng.<br>3. Kiểm tra giỏ hàng và điền thông tin nhận hàng để hoàn tất.')">Hỗ trợ</button>
+          <span id="authLinks">
+            <a href="register.html">Đăng ký</a>
+            <span class="sep">|</span>
+            <a href="login.html">Đăng nhập</a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-main container">
+      <a href="index.html" class="logo">
+        <span class="logo-badge">M</span>ModaShop
+      </a>
+
+      <form class="search-box" id="searchForm">
+        <input type="text" id="searchInput" placeholder="Tìm áo thun, quần jean, giày sneaker, túi xách...">
+        <button type="submit" aria-label="Tìm kiếm">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <span>Tìm kiếm</span>
+        </button>
+      </form>
+
+      <div class="header-actions">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Chuyển đổi giao diện Sáng/Tối" title="Chuyển chế độ Sáng / Tối">
+          <!-- Icon Mặt trăng (hiện khi đang ở nền Sáng) -->
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          <!-- Icon Mặt trời (hiện khi đang ở nền Tối) -->
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </button>
+
+        <a href="cart.html" class="cart" id="cartBtn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          <span class="cart-label">Giỏ hàng</span>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ===== BANNER HERO ===== -->
+    <section class="banner">
+      <div class="banner-main">
+        <span class="banner-tag">🎄 GIÁNG SINH AN LÀNH 2026</span>
+        <h1>MERRY CHRISTMAS SALE</h1>
+        <p>Ưu đãi mùa lễ hội đến 50% • Miễn phí vận chuyển cho đơn từ 299K</p>
+        <a href="#products" class="btn">Khám phá ngay →</a>
+      </div>
+      <div class="banner-side">
+        <a href="#products" class="banner-small banner-small-1" onclick="document.querySelector('[data-cat=\'giay-dep\']')?.click()">
+          <span class="small-tag">NEW ARRIVAL</span>
+          <h3>Giày mới về</h3>
+          <p>Xem bộ sưu tập →</p>
+        </a>
+        <a href="#products" class="banner-small banner-small-2" onclick="document.querySelector('[data-cat=\'phu-kien\']')?.click()">
+          <span class="small-tag">HOT DEAL</span>
+          <h3>Phụ kiện -30%</h3>
+          <p>Săn ưu đãi ngay →</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== CAM KẾT DỊCH VỤ (TĂNG ĐỘ TIN CẬY) ===== -->
+    <section class="service-bar" id="service-bar">
+      <div class="service-item">
+        <div class="service-icon">🚚</div>
+        <div>
+          <strong>Miễn phí vận chuyển</strong>
+          <span>Cho đơn hàng từ 299.000đ</span>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">🔄</div>
+        <div>
+          <strong>Đổi trả trong 7 ngày</strong>
+          <span>Hỗ trợ đổi size tận nơi</span>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">🛡️</div>
+        <div>
+          <strong>Thanh toán an toàn</strong>
+          <span>Kiểm tra hàng trước khi trả</span>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">💬</div>
+        <div>
+          <strong>Hỗ trợ trực tuyến</strong>
+          <span>Tư vấn phối đồ 8:00 - 22:00</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DANH MỤC ===== -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">DANH MỤC NỔI BẬT</h2>
+      </div>
+      <div class="categories" id="categories">
+        <button class="category active" data-cat="all">Tất cả sản phẩm</button>
+        <button class="category" data-cat="quan-ao">Quần áo</button>
+        <button class="category" data-cat="giay-dep">Giày dép</button>
+        <button class="category" data-cat="phu-kien">Phụ kiện</button>
+      </div>
+    </section>
+
+    <!-- ===== SẢN PHẨM ===== -->
+    <section class="section" id="products">
+      <div class="section-header">
+        <h2 class="section-title">GỢI Ý HÔM NAY</h2>
+        <span class="section-subtitle">Cập nhật xu hướng mới nhất</span>
+      </div>
+      <div class="product-grid" id="productGrid">
+        <!-- Sản phẩm được tạo bằng JavaScript (script.js) -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo footer-logo">
+          <span class="logo-badge">M</span>ModaShop
+        </a>
+        <p class="footer-desc">Nền tảng mua sắm thời trang trực tuyến trẻ trung, năng động với mức giá hợp lý dành cho sinh viên và giới trẻ.</p>
+      </div>
+      <div>
+        <h4>CHĂM SÓC KHÁCH HÀNG</h4>
+        <button type="button" class="footer-link-btn" onclick="openInfoModal('Trung tâm trợ giúp', 'Hotline hỗ trợ: 1900 6868 (8:00 - 22:00 hàng ngày)<br>Email: hotro@modashop.vn')">Trung tâm trợ giúp</button>
+        <button type="button" class="footer-link-btn" onclick="openInfoModal('Hướng dẫn mua hàng', 'Bước 1: Tìm kiếm sản phẩm.<br>Bước 2: Chọn size và thêm vào giỏ.<br>Bước 3: Xác nhận đơn hàng tại trang Giỏ hàng.')">Hướng dẫn mua hàng</button>
+        <button type="button" class="footer-link-btn" onclick="openInfoModal('Chính sách đổi trả', 'ModaShop hỗ trợ đổi size hoặc hoàn tiền trong vòng 7 ngày kể từ khi nhận hàng nếu sản phẩm còn nguyên tem mác.')">Chính sách đổi trả</button>
+      </div>
+      <div>
+        <h4>VỀ MODASHOP</h4>
+        <button type="button" class="footer-link-btn" onclick="openInfoModal('Giới thiệu ModaShop', 'ModaShop là đồ án website thương mại điện tử thời trang được xây dựng bởi nhóm sinh viên môn Thiết kế Web.')">Giới thiệu</button>
+        <a href="#products">Sản phẩm mới</a>
+        <a href="cart.html">Kiểm tra giỏ hàng</a>
+      </div>
+      <div>
+        <h4>PHƯƠNG THỨC THANH TOÁN</h4>
+        <div class="payment-badges">
+          <span>VISA / Master</span>
+          <span>Chuyển khoản</span>
+          <span>Tiền mặt (COD)</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">© 2026 ModaShop. Đồ án môn Thiết kế Web.</p>
+    </div>
+  </footer>
+
+  <!-- Cửa sổ Modal hiển thị thông tin chính sách (thay thế các link chết href="#") -->
+  <div class="info-modal-backdrop" id="infoModal" onclick="if(event.target===this) closeInfoModal()">
+    <div class="info-modal">
+      <div class="info-modal-header">
+        <h3 id="infoModalTitle">Thông tin</h3>
+        <button type="button" class="info-modal-close" onclick="closeInfoModal()">×</button>
+      </div>
+      <div class="info-modal-body" id="infoModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Thông báo nhỏ khi thêm vào giỏ -->
+  <div class="toast" id="toast">✓ Đã thêm sản phẩm vào giỏ hàng!</div> 
+
+  <script src="script.js"></script>
+  <script>
+    function openInfoModal(title, content) {
+      document.getElementById('infoModalTitle').textContent = title;
+      document.getElementById('infoModalBody').innerHTML = content;
+      document.getElementById('infoModal').classList.add('show');
+    }
+    function closeInfoModal() {
+      document.getElementById('infoModal').classList.remove('show');
+    }
+
+    // Xử lý bật/tắt Dark Mode và lưu trạng thái vào localStorage
+    const themeToggleBtn = document.getElementById('themeToggle');
+    if (themeToggleBtn && !themeToggleBtn.dataset.bound) {
+      themeToggleBtn.dataset.bound = 'true';
+      themeToggleBtn.addEventListener('click', () => {
+        const root = document.documentElement;
+        if (root.getAttribute('data-theme') === 'dark') {
+          root.removeAttribute('data-theme');
+          localStorage.setItem('modashop_theme', 'light');
+        } else {
+          root.setAttribute('data-theme', 'dark');
+          localStorage.setItem('modashop_theme', 'dark');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiết sản phẩm - ModaShop</title>
+  <script>
+    // Giữ nguyên trạng thái Dark Mode ngay lập tức khi chuyển trang
+    if (localStorage.getItem('modashop_theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ĐỒNG BỘ VỚI TRANG CHỦ ===== -->
+  <header class="header">
+    <div class="header-top">
+      <div class="container header-top-inner">
+        <div class="header-links">
+          <a href="index.html">← Quay lại trang chủ</a>
+          <a href="index.html#products">Bộ sưu tập mới</a>
+        </div>
+        <div class="header-links">
+          <span id="authLinks">
+            <a href="register.html">Đăng ký</a>
+            <span class="sep">|</span>
+            <a href="login.html">Đăng nhập</a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-main container">
+      <a href="index.html" class="logo">
+        <span class="logo-badge">M</span>ModaShop
+      </a>
+
+      <div class="page-breadcrumb">Chi tiết sản phẩm</div>
+
+      <div class="header-actions">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Chuyển đổi giao diện Sáng/Tối" title="Chuyển chế độ Sáng / Tối">
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </button>
+
+        <a href="cart.html" class="cart" id="cartBtn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          <span class="cart-label">Giỏ hàng</span>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== NỘI DUNG CHI TIẾT SẢN PHẨM ===== -->
+  <main class="container product-detail-page">
+  <nav class="breadcrumb-nav" id="breadcrumb"></nav>
+  <section id="productDetail"></section>
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">SẢN PHẨM TƯƠNG TỰ</h2>
+    </div>
+    <div class="product-grid" id="relatedGrid"></div>
+  </section>
+</main>
+
+  <!-- ===== FOOTER ĐỒNG BỘ ===== -->
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p class="copyright">© 2026 ModaShop. Đồ án môn Thiết kế Web.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">✓ Đã thêm sản phẩm vào giỏ hàng!</div>
+
+  <script src="script.js"></script>
+  <script>
+    // 1. Đồng bộ nút bật/tắt Dark Mode
+    const themeToggleBtn = document.getElementById('themeToggle');
+    if (themeToggleBtn && !themeToggleBtn.dataset.bound) {
+      themeToggleBtn.dataset.bound = 'true';
+      themeToggleBtn.addEventListener('click', () => {
+        const root = document.documentElement;
+        if (root.getAttribute('data-theme') === 'dark') {
+          root.removeAttribute('data-theme');
+          localStorage.setItem('modashop_theme', 'light');
+        } else {
+          root.setAttribute('data-theme', 'dark');
+          localStorage.setItem('modashop_theme', 'dark');
+        }
+      });
+    }
+
+    // 2. Xử lý chọn Size (S, M, L, XL)
+    const sizeBtns = document.querySelectorAll('.size-btn');
+    const selectedSizeText = document.getElementById('selectedSizeText');
+    sizeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sizeBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (selectedSizeText) selectedSizeText.textContent = btn.dataset.size;
+      });
+    });
+
+    // 3. Xử lý tăng/giảm số lượng
+    const qtyInput = document.getElementById('productQty');
+    document.getElementById('qtyMinus')?.addEventListener('click', () => {
+      const current = parseInt(qtyInput.value, 10) || 1;
+      if (current > 1) qtyInput.value = current - 1;
+    });
+    document.getElementById('qtyPlus')?.addEventListener('click', () => {
+      const current = parseInt(qtyInput.value, 10) || 1;
+      qtyInput.value = current + 1;
+    });
+  </script>
+</body>
+</html>
