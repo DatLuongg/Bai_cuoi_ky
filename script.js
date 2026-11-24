@@ -260,6 +260,23 @@ function renderProducts() {
   productGrid.innerHTML = list.map(productCardHTML).join("");
 }
 
+// Tự động chọn danh mục và cuộn mượt xuống khu vực sản phẩm
+function goToCategory(cat) {
+  const targetBtn = document.querySelector(`.category[data-cat="${cat}"]`);
+  if (targetBtn) {
+    targetBtn.click();
+  }
+  const section = document.getElementById("products");
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+// Hỗ trợ mở danh mục từ trang khác thông qua link (ví dụ: index.html?cat=giay-dep)
+const urlCat = new URLSearchParams(location.search).get("cat");
+if (urlCat && productGrid) {
+  goToCategory(urlCat);
+}
 categoryBtns.forEach(btn => {
   btn.addEventListener("click", () => {
     categoryBtns.forEach(b => b.classList.remove("active"));
@@ -594,7 +611,7 @@ function renderAuthLinks() {
   const user = getCurrentUser();
   if (user) {
     box.innerHTML = `
-      <span class="hello-user">Xin chào, ${user.name}</span>
+      <a href="profile.html" class="hello-user">Xin chào, ${user.name}</a>
       <a href="#" onclick="logout(); return false;">Đăng xuất</a>`;
   }
 }
