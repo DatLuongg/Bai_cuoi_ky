@@ -51,21 +51,72 @@ const products = [
     },  
     price: 219000, oldPrice: 279000, category: "quan-ao",  sold: 330,  colors: ["Trắng", "Xanh nhạt", "Hồng"],
     description: "Áo sơ mi vải lụa mềm, ít nhăn, phù hợp đi làm và đi học. Thiết kế đơn giản, thanh lịch." },
-  { id: 5,  name: "Giày sneaker trắng unisex",          price: 399000, oldPrice: 599000, category: "giay-dep", sold: 2100, colors: ["Trắng", "Trắng đen"],
+  { id: 5,  name: "Giày sneaker trắng unisex",       
+    image : "sneaker_trang.jpg",
+    colorImages:{
+        "Trắng" : "sneaker_trang.jpg",
+        "Trắng đen" : "sneaker_trang_den.jpg"
+    },
+    price: 399000, oldPrice: 599000, category: "giay-dep", sold: 2100, colors: ["Trắng", "Trắng đen"],
     description: "Giày sneaker đế cao su êm, chống trơn trượt. Kiểu dáng basic dễ phối đồ, phù hợp cả nam và nữ." },
-  { id: 6,  name: "Giày cao gót mũi nhọn 7cm",          price: 289000, oldPrice: 390000, category: "giay-dep", sold: 410,  colors: ["Đen", "Kem", "Đỏ"],
+  { id: 6,  name: "Giày cao gót mũi nhọn 7cm",    
+    image : "cao_got_den.webp",
+    colorImages:{
+        "Đen" : "cao_got_den.webp",
+        "Kem" : "cao_got_kem.jpg",
+        "Đỏ" : "cao_got_do.webp"
+    },
+    price: 289000, oldPrice: 390000, category: "giay-dep", sold: 410,  colors: ["Đen", "Kem", "Đỏ"],
     description: "Giày cao gót 7cm mũi nhọn thanh lịch, gót vững chắc, lót đệm êm chân. Thích hợp đi làm, dự tiệc." },
-  { id: 7,  name: "Dép quai ngang đế êm chống trượt",   price: 79000,  oldPrice: 120000, category: "giay-dep", sold: 3400, colors: ["Đen", "Trắng", "Xanh", "Hồng"],
+  { id: 7,  name: "Dép quai ngang đế êm chống trượt", 
+    image: "dep_den.jpg",
+    colorImages:{
+        "Đen" : "dep_den.jpg",
+        "Trắng" : "dep_trang.webp",
+        "Xanh" : "dep_xanh.webp",
+        "Hồng" : "dep_hong.jpg"
+    },  price: 79000,  oldPrice: 120000, category: "giay-dep", sold: 3400, colors: ["Đen", "Trắng", "Xanh", "Hồng"],
     description: "Dép quai ngang đế EVA siêu nhẹ, êm chân, chống trượt khi đi mưa. Dùng đi trong nhà hoặc đi chơi đều được." },
-  { id: 8,  name: "Boot da cổ ngắn phong cách Hàn",     price: 459000, oldPrice: 650000, category: "giay-dep", sold: 220,  colors: ["Đen", "Nâu"],
+  { id: 8,  name: "Boot da cổ ngắn phong cách Hàn",  
+    image : "boot_den.webp",
+    colorImages:{
+        "Đen" : "boot_den.webp",
+        "Nâu" : "boot_nau.webp"
+    },
+    price: 459000, oldPrice: 650000, category: "giay-dep", sold: 220,  colors: ["Đen", "Nâu"],
     description: "Boot da PU cao cấp, cổ ngắn có khóa kéo bên hông, dễ mang. Phong cách Hàn Quốc cá tính." },
-  { id: 9,  name: "Túi xách nữ đeo vai thời trang",     price: 239000, oldPrice: 320000, category: "phu-kien", sold: 780,  colors: ["Đen", "Trắng", "Nâu"],
+  { id: 9,  name: "Túi xách nữ đeo vai thời trang",    
+    image: "tui_xach_den.jpg",
+    colorImages:{
+        "Đen" : "tui_xach_den.jpg",
+        "Trắng" : "tui_xach_trang.jpg",
+        "Nâu" : "tui_xach_nau.jpg"
+    }, price: 239000, oldPrice: 320000, category: "phu-kien", sold: 780,  colors: ["Đen", "Trắng", "Nâu"],
     description: "Túi xách da mềm, nhiều ngăn tiện lợi, đựng vừa điện thoại, ví và đồ trang điểm. Có dây đeo vai điều chỉnh được." },
-  { id: 10, name: "Mũ lưỡi trai thêu chữ",              price: 69000,  oldPrice: 99000,  category: "phu-kien", sold: 1500, colors: ["Đen", "Trắng", "Be", "Xanh navy"],
+  { id: 10, name: "Mũ lưỡi trai thêu chữ",            
+    image: "mu_den.jpg",
+    colorImages:{
+        "Đen" : "mu_den.jpg",
+        "Trắng" : "mu_trang.webp",
+        "Be": "mu_be.webp",
+        "Xanh navy" : "mu_xanh_navy.webp"
+    },  price: 69000,  oldPrice: 99000,  category: "phu-kien", sold: 1500, colors: ["Đen", "Trắng", "Be", "Xanh navy"],
     description: "Mũ lưỡi trai vải kaki, thêu chữ sắc nét, có khóa điều chỉnh vòng đầu phía sau." },
-  { id: 11, name: "Kính mát chống tia UV",              price: 149000, oldPrice: 250000, category: "phu-kien", sold: 640,  colors: ["Đen", "Trà"],
+  { id: 11, name: "Kính mát chống tia UV",      
+    image:"kinh_den.jpg",
+    colorImages:{
+        "Đen" : "kinh_den.jpg",
+        "Trà" : "kinh_tra.webp"
+    },
+    price: 149000, oldPrice: 250000, category: "phu-kien", sold: 640,  colors: ["Đen", "Trà"],
     description: "Kính mát tròng chống tia UV400, gọng nhựa dẻo nhẹ. Tặng kèm hộp đựng và khăn lau kính." },
-  { id: 12, name: "Balo laptop chống nước",             price: 329000, oldPrice: 450000, category: "phu-kien", sold: 910,  colors: ["Đen", "Xám"],
+  { id: 12, name: "Balo laptop chống nước", 
+    image: "balo_den.jpg",
+    colorImages:{
+        "Đen" : "balo_den.jpg",
+        "Xám" : "balo_xam.jpg"
+    },            
+    price: 329000, oldPrice: 450000, category: "phu-kien", sold: 910,  colors: ["Đen", "Xám"],
     description: "Balo vải chống nước, có ngăn chống sốc cho laptop 15.6 inch, cổng sạc USB tiện lợi." },
 ];
 
