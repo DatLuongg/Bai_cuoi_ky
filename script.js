@@ -30,13 +30,13 @@ const products = [
     image: "vay_vang.jpg", // Ảnh hiển thị mặc định khi mới mở trang
     colorImages: {
       "Hoa vàng": "vay_vang.jpg",
-      "Hoa xanh": "vay_den.webp"
+      "Hoa đen": "vay_den.webp"
     },
     price: 189000, 
     oldPrice: 290000, 
     category: "quan-ao",  
     sold: 540,  
-    colors: ["Hoa vàng", "Hoa xanh"],
+    colors: ["Hoa vàng", "Hoa đen"],
     description: "Váy voan hoa nhí nhẹ nhàng, dáng xòe bay bổng, rất hợp đi biển, đi chơi hoặc chụp ảnh. Có lớp lót bên trong không bị lộ." 
   },
   { 
