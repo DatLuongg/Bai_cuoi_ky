@@ -1,10 +1,278 @@
 <!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hồ sơ cá nhân - ModaShop</title>
+  <script>
+    // Áp dụng Dark Mode ngay lập tức trước khi CSS render để tránh nháy trắng
+    if (localStorage.getItem('modashop_theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .profile-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      border: 2px solid rgba(255, 255, 255, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .profile-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+    .profile-info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(148, 163, 184, 0.12);
+      font-size: 14px;
+    }
+    .profile-info-label {
+      opacity: 0.75;
+      font-weight: 500;
+    }
+    .profile-info-value {
+      font-weight: 700;
+    }
+    .profile-badge-active {
+      background: #dcfce7;
+      color: #166534;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .profile-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .btn-outline-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: transparent;
+      color: inherit;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+    .btn-outline-secondary:hover {
+      background: rgba(148, 163, 184, 0.14);
+    }
+    .btn-danger-soft {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: none;
+      background: #fee2e2;
+      color: #b91c1c;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .btn-danger-soft:hover {
+      background: #fecaca;
+    }
+    [data-theme="dark"] .btn-danger-soft {
+      background: rgba(220, 38, 38, 0.2);
+      color: #fca5a5;
+    }
+    .profile-guest {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .profile-guest p {
+      margin: 10px 0 22px;
+      opacity: 0.8;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body class="auth-page">
 
-<html>
-    <head>
+  <!-- Header đồng bộ với toàn bộ website ModaShop -->
+  <header class="auth-header">
+    <div class="container auth-header-inner">
+      <div class="auth-header-left">
+        <a href="index.html" class="logo auth-logo">
+          <span class="logo-badge">M</span>ModaShop
+        </a>
+        <span class="auth-page-title">Hồ sơ cá nhân</span>
+      </div>
 
-    </head>
-    <body>
-        <h1>I am Ambition!</h1>
-    </body>
+      <div class="header-actions">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Chuyển đổi giao diện Sáng/Tối" title="Chuyển chế độ Sáng / Tối">
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </button>
+        <a href="index.html" class="auth-back-link">← Trang chủ</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <div class="container auth-wrap">
+
+      <!-- Cột trái: Thẻ thành viên -->
+      <div class="auth-intro">
+        <div class="profile-avatar" id="profileAvatar">M</div>
+        <span class="banner-tag">THÀNH VIÊN MODASHOP</span>
+        <h1 id="profileHeroName">Khách hàng ModaShop</h1>
+        <p>Quản lý thông tin tài khoản và theo dõi quyền lợi ưu đãi mua sắm của bạn.</p>
+        <ul class="auth-perks">
+          <li>✓ Giảm ngay 15% cho đơn hàng đầu tiên từ 299.000đ</li>
+          <li>✓ Miễn phí vận chuyển toàn quốc cho đơn từ 299.000đ</li>
+          <li>✓ Đổi size linh hoạt miễn phí tại nhà trong 7 ngày</li>
+        </ul>
+      </div>
+
+      <!-- Cột phải: Chi tiết tài khoản -->
+      <div class="auth-box" id="profileContent"></div>
+
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+  <script>
+    // Xử lý bật/tắt Dark Mode
+    const themeToggleBtn = document.getElementById('themeToggle');
+    if (themeToggleBtn && !themeToggleBtn.dataset.bound) {
+      themeToggleBtn.dataset.bound = 'true';
+      themeToggleBtn.addEventListener('click', () => {
+        const root = document.documentElement;
+        if (root.getAttribute('data-theme') === 'dark') {
+          root.removeAttribute('data-theme');
+          localStorage.setItem('modashop_theme', 'light');
+        } else {
+          root.setAttribute('data-theme', 'dark');
+          localStorage.setItem('modashop_theme', 'dark');
+        }
+      });
+    }
+
+    // Hiển thị thông tin tài khoản từ localStorage
+    function renderProfilePage() {
+      const box = document.getElementById('profileContent');
+      const heroName = document.getElementById('profileHeroName');
+      const avatar = document.getElementById('profileAvatar');
+      const currentUser = JSON.parse(localStorage.getItem('modashop_user') || 'null');
+      const cart = JSON.parse(localStorage.getItem('modashop_cart') || '[]');
+      const totalCartQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+
+      if (!currentUser) {
+        box.innerHTML = `
+          <div class="profile-guest">
+            <h2>Bạn chưa đăng nhập</h2>
+            <p>Vui lòng đăng nhập hoặc tạo tài khoản ModaShop để xem thông tin hồ sơ cá nhân.</p>
+            <div class="profile-actions">
+              <a href="login.html" class="btn-main" style="text-decoration:none; text-align:center;">Đăng nhập</a>
+              <a href="register.html" class="btn-outline-secondary">Đăng ký mới</a>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      const displayName = currentUser.name || 'Thành viên';
+      heroName.textContent = displayName;
+      avatar.textContent = displayName.trim().charAt(0).toUpperCase();
+
+      box.innerHTML = `
+        <h2>Thông tin tài khoản</h2>
+        <p class="auth-subtitle">Dữ liệu thành viên được đồng bộ trên trình duyệt của bạn</p>
+
+        <div class="profile-info-list">
+          <div class="profile-info-item">
+            <span class="profile-info-label">Họ và tên</span>
+            <span class="profile-info-value" id="infoNameText">${displayName}</span>
+          </div>
+          <div class="profile-info-item">
+            <span class="profile-info-label">Email / SĐT</span>
+            <span class="profile-info-value">${currentUser.account || 'Chưa cập nhật'}</span>
+          </div>
+          <div class="profile-info-item">
+            <span class="profile-info-label">Trạng thái</span>
+            <span class="profile-badge-active">Đang hoạt động</span>
+          </div>
+          <div class="profile-info-item">
+            <span class="profile-info-label">Giỏ hàng hiện tại</span>
+            <span class="profile-info-value">${totalCartQty} sản phẩm</span>
+          </div>
+        </div>
+
+        <form id="updateProfileForm">
+          <div class="form-group">
+            <label for="newDisplayName" class="form-label">Đổi tên hiển thị</label>
+            <input type="text" id="newDisplayName" value="${displayName}" placeholder="Nhập họ và tên mới">
+          </div>
+          <button type="submit" class="btn-main auth-submit">LƯU THAY ĐỔI</button>
+        </form>
+
+        <div class="profile-actions">
+          <a href="cart.html" class="btn-outline-secondary">Xem giỏ hàng (${totalCartQty})</a>
+          <button type="button" class="btn-danger-soft" id="profileLogoutBtn">Đăng xuất</button>
+        </div>
+      `;
+
+      // Cập nhật tên hiển thị
+      document.getElementById('updateProfileForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newName = document.getElementById('newDisplayName').value.trim();
+        if (!newName) return;
+
+        currentUser.name = newName;
+        localStorage.setItem('modashop_user', JSON.stringify(currentUser));
+
+        const users = JSON.parse(localStorage.getItem('modashop_users') || '[]');
+        const idx = users.findIndex(u => u.account === currentUser.account);
+        if (idx !== -1) {
+          users[idx].name = newName;
+          localStorage.setItem('modashop_users', JSON.stringify(users));
+        }
+
+        renderProfilePage();
+        if (typeof showToast === 'function') {
+          showToast('Đã cập nhật tên hiển thị!');
+        }
+      });
+
+      // Xử lý đăng xuất
+      document.getElementById('profileLogoutBtn').addEventListener('click', () => {
+        localStorage.removeItem('modashop_user');
+        window.location.href = 'index.html';
+      });
+    }
+
+    renderProfilePage();
+  </script>
+</body>
 </html>
