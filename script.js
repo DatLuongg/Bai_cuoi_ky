@@ -273,10 +273,7 @@ function goToCategory(cat) {
 }
 
 // Hỗ trợ mở danh mục từ trang khác thông qua link (ví dụ: index.html?cat=giay-dep)
-const urlCat = new URLSearchParams(location.search).get("cat");
-if (urlCat && productGrid) {
-  goToCategory(urlCat);
-}
+
 categoryBtns.forEach(btn => {
   btn.addEventListener("click", () => {
     categoryBtns.forEach(b => b.classList.remove("active"));
@@ -716,7 +713,10 @@ updateCartCount();
 renderProducts();
 renderProductDetail();
 renderCart();
-
+const urlCat = new URLSearchParams(location.search).get("cat");
+if (urlCat && productGrid) {
+  goToCategory(urlCat);
+}
 // ===== HIỆU ỨNG TUYẾT RƠI GIÁNG SINH TOÀN TRANG =====
 (function initChristmasSnow() {
   const symbols = ['❄', '❅', '❆', '•'];
